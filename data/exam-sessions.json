@@ -1,0 +1,463 @@
+[
+  {
+    "id": "cb6607cf-ac32-46b6-a97e-4251c407b8df",
+    "userId": "ff9d17f1-040b-44c3-a1f8-cfb909c6a77b",
+    "subject": "math",
+    "difficulty": "easy",
+    "questions": [
+      {
+        "id": "d407705b-c0da-4a26-8ab5-ec889912f575",
+        "q": "ما ناتج 81 ÷ 9؟",
+        "answers": [
+          "6",
+          "9",
+          "7",
+          "8"
+        ],
+        "correctIndex": 1
+      },
+      {
+        "id": "732bf842-a060-472f-b773-582f9d5fd37f",
+        "q": "ما العدد الزوجي؟",
+        "answers": [
+          "25",
+          "21",
+          "18",
+          "13"
+        ],
+        "correctIndex": 2
+      },
+      {
+        "id": "b99fd997-0c55-4283-9127-a3c762a3b259",
+        "q": "ما المتوسط الحسابي للأعداد 2 و4 و6؟",
+        "answers": [
+          "4",
+          "3",
+          "6",
+          "5"
+        ],
+        "correctIndex": 0
+      },
+      {
+        "id": "21a2147f-e069-4c81-9bb1-511d76fc4c53",
+        "q": "ما ناتج 8 + 7؟",
+        "answers": [
+          "17",
+          "14",
+          "15",
+          "16"
+        ],
+        "correctIndex": 2
+      },
+      {
+        "id": "32ed646b-a314-42dd-8b93-e8f079670c53",
+        "q": "إذا كان س + 6 = 14، فما قيمة س؟",
+        "answers": [
+          "9",
+          "8",
+          "7",
+          "6"
+        ],
+        "correctIndex": 1
+      },
+      {
+        "id": "cdda3086-acbc-4902-bf81-a759a7d07879",
+        "q": "ما العدد الأولي؟",
+        "answers": [
+          "15",
+          "27",
+          "21",
+          "13"
+        ],
+        "correctIndex": 3
+      },
+      {
+        "id": "543866f4-34fc-4747-953a-a61269c29b41",
+        "q": "ما ناتج 50 - 18؟",
+        "answers": [
+          "32",
+          "42",
+          "28",
+          "38"
+        ],
+        "correctIndex": 0
+      },
+      {
+        "id": "8d7ba529-47e6-4a80-9a8f-72b7c0057b08",
+        "q": "ما العدد الذي يقبل القسمة على 5؟",
+        "answers": [
+          "31",
+          "38",
+          "45",
+          "42"
+        ],
+        "correctIndex": 2
+      },
+      {
+        "id": "3709101b-bad0-4f96-9473-6373203844b5",
+        "q": "ما ناتج 250 + 175؟",
+        "answers": [
+          "415",
+          "435",
+          "425",
+          "450"
+        ],
+        "correctIndex": 2
+      },
+      {
+        "id": "4409f4e6-c401-4d01-beaa-0f899f4e34ad",
+        "q": "ما الكسر الأكبر؟",
+        "answers": [
+          "2/8",
+          "1/4",
+          "3/4",
+          "1/2"
+        ],
+        "correctIndex": 2
+      },
+      {
+        "id": "d15c3a14-af8d-4562-b050-462c6b70e97a",
+        "q": "كم درجة في الزاوية القائمة؟",
+        "answers": [
+          "180",
+          "90",
+          "360",
+          "45"
+        ],
+        "correctIndex": 1
+      },
+      {
+        "id": "0b582d00-8db2-4038-81ad-c4504bad748f",
+        "q": "ما قيمة 20% من 100؟",
+        "answers": [
+          "10",
+          "25",
+          "20",
+          "40"
+        ],
+        "correctIndex": 2
+      },
+      {
+        "id": "26d026ee-6467-496a-8620-92e543810152",
+        "q": "ما ناتج 36 ÷ 6؟",
+        "answers": [
+          "6",
+          "7",
+          "5",
+          "8"
+        ],
+        "correctIndex": 0
+      },
+      {
+        "id": "4f265ad1-4582-4cac-b637-d44224d254ee",
+        "q": "أي كسر يساوي نصفًا؟",
+        "answers": [
+          "1/3",
+          "3/4",
+          "2/3",
+          "2/4"
+        ],
+        "correctIndex": 3
+      },
+      {
+        "id": "dc9c1dd9-0ffc-483c-b081-4b7241956e59",
+        "q": "إذا كان 3س = 21، فما قيمة س؟",
+        "answers": [
+          "6",
+          "8",
+          "7",
+          "9"
+        ],
+        "correctIndex": 2
+      }
+    ],
+    "createdAt": 1791906080190,
+    "completedAt": 1791906145766,
+    "score": 2,
+    "xpAwarded": 0
+  },
+  {
+    "id": "45ce53da-d4a9-4814-921a-6b305edf82ef",
+    "userId": "ff9d17f1-040b-44c3-a1f8-cfb909c6a77b",
+    "subject": "english",
+    "difficulty": "hard",
+    "questions": [
+      {
+        "id": "ec4a1c58-909d-4bc5-93aa-d0dd27bf549c",
+        "q": "What is the opposite of 'early'?",
+        "answers": [
+          "soon",
+          "late",
+          "first",
+          "fast"
+        ],
+        "correctIndex": 1
+      },
+      {
+        "id": "1fbc4929-dd04-417d-ab3e-bbecbccf0329",
+        "q": "What is the plural of 'woman'?",
+        "answers": [
+          "womans",
+          "womens",
+          "womanes",
+          "women"
+        ],
+        "correctIndex": 3
+      },
+      {
+        "id": "89516546-727b-48b3-b1bd-e285e5ae0445",
+        "q": "What is the opposite of 'hot'?",
+        "answers": [
+          "high",
+          "cold",
+          "bright",
+          "warm"
+        ],
+        "correctIndex": 1
+      },
+      {
+        "id": "37d8042b-c053-4a77-a694-ea2dfbaeac80",
+        "q": "Which is a complete question?",
+        "answers": [
+          "Where you live.",
+          "You where live",
+          "Where do you live?",
+          "Live where you"
+        ],
+        "correctIndex": 2
+      },
+      {
+        "id": "7f367d35-2505-479b-a15b-dbf7b29ce04d",
+        "q": "Which pronoun refers to a girl?",
+        "answers": [
+          "they only",
+          "he",
+          "she",
+          "it only"
+        ],
+        "correctIndex": 2
+      },
+      {
+        "id": "81f1534d-74a8-4555-a9bd-71b03c2b6a95",
+        "q": "What is the plural of 'foot'?",
+        "answers": [
+          "foots",
+          "footies",
+          "footes",
+          "feet"
+        ],
+        "correctIndex": 3
+      },
+      {
+        "id": "559a35d7-244b-4442-a5aa-43e6f35c8afe",
+        "q": "Which is a question word?",
+        "answers": [
+          "green",
+          "where",
+          "because",
+          "quick"
+        ],
+        "correctIndex": 1
+      },
+      {
+        "id": "0ff186b9-971a-47b5-b2e6-a90454bfae7c",
+        "q": "What is the past of 'go'?",
+        "answers": [
+          "went",
+          "goes",
+          "goed",
+          "going"
+        ],
+        "correctIndex": 0
+      },
+      {
+        "id": "56183d81-28ad-4872-99fe-ae482639d502",
+        "q": "Choose the correct article: ___ apple",
+        "answers": [
+          "some",
+          "a",
+          "an",
+          "the a"
+        ],
+        "correctIndex": 2
+      },
+      {
+        "id": "76b382ac-e010-46fa-a634-d19ab6bf1255",
+        "q": "Which sentence is in the future?",
+        "answers": [
+          "I travel every day.",
+          "I travelled yesterday.",
+          "I am at home now.",
+          "I will travel tomorrow."
+        ],
+        "correctIndex": 3
+      },
+      {
+        "id": "5b1d1c95-5c52-4b66-bb2a-552efd64a4b2",
+        "q": "What does 'quickly' describe?",
+        "answers": [
+          "A place only",
+          "How an action happens",
+          "A number",
+          "A person only"
+        ],
+        "correctIndex": 1
+      },
+      {
+        "id": "33a32719-8336-4dcb-a83b-453a76180588",
+        "q": "Which is a noun?",
+        "answers": [
+          "run",
+          "beautiful",
+          "quickly",
+          "teacher"
+        ],
+        "correctIndex": 3
+      },
+      {
+        "id": "533229de-d0a8-40bf-9184-b59149d73b47",
+        "q": "Choose the correct form: There ___ two pens.",
+        "answers": [
+          "is",
+          "am",
+          "be",
+          "are"
+        ],
+        "correctIndex": 3
+      },
+      {
+        "id": "69ec1afb-4afb-4d3f-9508-b485a8c1d8d5",
+        "q": "Complete: He doesn't ___ coffee.",
+        "answers": [
+          "liking",
+          "likes",
+          "like",
+          "liked"
+        ],
+        "correctIndex": 2
+      },
+      {
+        "id": "d831dc44-5ad5-4771-b556-9f9d74269cee",
+        "q": "What is the opposite of 'clean'?",
+        "answers": [
+          "clear",
+          "tidy",
+          "dirty",
+          "fresh"
+        ],
+        "correctIndex": 2
+      },
+      {
+        "id": "ba475461-d01f-4f52-b167-6d21ee67885e",
+        "q": "What is the comparative of 'small'?",
+        "answers": [
+          "smallest",
+          "more smallest",
+          "small",
+          "smaller"
+        ],
+        "correctIndex": 3
+      },
+      {
+        "id": "b51bd079-4245-4b9f-8d64-4a371145a85a",
+        "q": "What is the opposite of 'strong'?",
+        "answers": [
+          "weak",
+          "tall",
+          "heavy",
+          "hard"
+        ],
+        "correctIndex": 0
+      },
+      {
+        "id": "5923eb9c-d00f-4251-b8b4-170789adc560",
+        "q": "Choose the correct past form: They ___ at home.",
+        "answers": [
+          "is",
+          "were",
+          "was",
+          "be"
+        ],
+        "correctIndex": 1
+      },
+      {
+        "id": "2c3d491a-0c5d-4069-a8f7-7150655e84cc",
+        "q": "Which word is a color?",
+        "answers": [
+          "quickly",
+          "table",
+          "under",
+          "blue"
+        ],
+        "correctIndex": 3
+      },
+      {
+        "id": "21a78cf3-2fd9-4730-9e74-1df06beded47",
+        "q": "What is the plural of 'child'?",
+        "answers": [
+          "childs",
+          "childrens",
+          "children",
+          "childes"
+        ],
+        "correctIndex": 2
+      },
+      {
+        "id": "f9cbeebf-3fab-4a5a-b07c-3c26e0f8b730",
+        "q": "Choose the correct preposition: The book is ___ the table.",
+        "answers": [
+          "at to",
+          "from of",
+          "because",
+          "on"
+        ],
+        "correctIndex": 3
+      },
+      {
+        "id": "69c9eb8f-9a6b-4a04-b87c-7722aefe9486",
+        "q": "Complete: Yesterday, I ___ my friend.",
+        "answers": [
+          "visits",
+          "visit",
+          "visiting",
+          "visited"
+        ],
+        "correctIndex": 3
+      },
+      {
+        "id": "e73497d5-4b89-4e10-a373-cd2a93a3d5f8",
+        "q": "Complete: They ___ football every Friday.",
+        "answers": [
+          "plays",
+          "play",
+          "played yesterday",
+          "playing"
+        ],
+        "correctIndex": 1
+      },
+      {
+        "id": "260a7e9b-f081-4704-b2b5-f9278d53ac73",
+        "q": "Complete: My brother is older ___ me.",
+        "answers": [
+          "then",
+          "them",
+          "than",
+          "that"
+        ],
+        "correctIndex": 2
+      },
+      {
+        "id": "78675412-cc3b-4f0b-91c1-3d3a1ee3f876",
+        "q": "Complete: We ___ studying now.",
+        "answers": [
+          "am",
+          "are",
+          "is",
+          "be"
+        ],
+        "correctIndex": 1
+      }
+    ],
+    "createdAt": 1791906171390
+  }
+]

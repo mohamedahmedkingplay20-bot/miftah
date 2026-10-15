@@ -1,0 +1,49 @@
+[
+  {
+    "id": "ff9d17f1-040b-44c3-a1f8-cfb909c6a77b",
+    "name": "king_play",
+    "username": "mohamedahmedyounis1233456",
+    "email": "mohamedahmedyounis0123@gmail.com",
+    "passwordHash": "$2b$12$1P3fz0EzDL.d1/0gQm5YResnZveJqyQowZ9r7WcLlm2k3wBDRDpoe",
+    "language": "ar",
+    "category": "study",
+    "role": "student",
+    "profile": {
+      "nickname": ""
+    },
+    "xp": 160,
+    "premiumDiscount": 0,
+    "discountClaimed": false,
+    "createdAt": "2026-09-13T15:07:35.228Z"
+  },
+  {
+    "id": "baceb395-a559-4022-81e9-7e4a536f5f0e",
+    "name": "ksds",
+    "username": "sdsjdj;lsdjnl",
+    "email": "mohamedahmedkingplay20@gmail.com",
+    "passwordHash": "$2b$12$O4t0suabE/YYevZt2v9TB.ghQz/kipQiGhlgCOJxp1W7lMKJcNvhy",
+    "language": "ar",
+    "category": "study",
+    "role": "student",
+    "profile": {},
+    "xp": 0,
+    "premiumDiscount": 0,
+    "discountClaimed": false,
+    "createdAt": "2026-10-04T14:57:19.173Z"
+  },
+  {
+    "id": "64c3c887-a896-4abc-bded-15f0b0be98af",
+    "name": "Miftah",
+    "username": "Miftag3205",
+    "email": "miftah.app2026@gmail.com",
+    "passwordHash": "$2b$12$pzBA.WKWI3rl9WLI9iRwI.PurnwyKJg1REvB1tWOTMPg6ofrIrbB6",
+    "language": "ar",
+    "category": "gaming",
+    "role": "student",
+    "profile": {},
+    "xp": 35,
+    "premiumDiscount": 0,
+    "discountClaimed": false,
+    "createdAt": "2026-10-05T18:08:27.069Z"
+  }
+]

@@ -1,0 +1,184 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import Link from "next/link";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
+import { useLanguage } from "@/components/LanguageProvider";
+
+export default function StudyPage() {
+  const { isArabic } = useLanguage();
+
+  const [seconds, setSeconds] = useState(0);
+  const [running, setRunning] = useState(false);
+  const [finishedXp, setFinishedXp] = useState<number | null>(null);
+
+  useEffect(() => {
+    if (!running) return;
+
+    const timer = setInterval(() => {
+      setSeconds((value) => value + 1);
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, [running]);
+
+  const minutes = Math.floor(seconds / 60);
+  const secs = seconds % 60;
+
+  async function finishSession() {
+    setRunning(false);
+
+    const xp = Math.max(5, minutes * 5);
+
+    try {
+      const response = await fetch("/api/xp/add", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ amount: xp }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        alert(data?.error || "حدث خطأ أثناء حفظ XP.");
+        return;
+      }
+
+      setFinishedXp(data.added);
+    } catch {
+      alert("تعذر الاتصال بالسيرفر.");
+    }
+  }
+
+  function resetSession() {
+    setRunning(false);
+    setSeconds(0);
+    setFinishedXp(null);
+  }
+
+  return (
+    <main
+      dir={isArabic ? "rtl" : "ltr"}
+      className="min-h-screen bg-[#050b16] px-6 py-10 text-white"
+    >
+      <div className="mx-auto max-w-5xl">
+        <div className="mb-8 flex items-center justify-between gap-4">
+          <Link
+            href="/"
+            className="rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-sm hover:bg-white/10"
+          >
+            {isArabic ? "← الرئيسية" : "← Home"}
+          </Link>
+
+          <LanguageSwitcher />
+        </div>
+
+        <section className="rounded-3xl border border-white/10 bg-[#0b1423] p-8 shadow-2xl">
+          <p className="mb-2 text-sm text-blue-400">
+            {isArabic ? "📚 قسم الدراسة" : "📚 Study"}
+          </p>
+
+          <h1 className="mb-3 text-4xl font-black">
+            {isArabic ? "ابدأ جلسة مذاكرة" : "Start a study session"}
+          </h1>
+
+          <p className="mb-8 text-slate-400">
+            {isArabic
+              ? "ذاكر بتركيز، واحسب وقتك، واكسب XP."
+              : "Study with focus, track your time, and earn XP."}
+          </p>
+
+          <div className="mb-8 rounded-2xl bg-black/20 p-8 text-center">
+            <div className="mb-6 text-6xl font-black tabular-nums">
+              {String(minutes).padStart(2, "0")}:
+              {String(secs).padStart(2, "0")}
+            </div>
+
+            <div className="flex flex-wrap justify-center gap-3">
+              <button
+                onClick={() => setRunning((value) => !value)}
+                className="rounded-xl bg-blue-600 px-6 py-3 font-bold hover:bg-blue-500"
+              >
+                {running
+                  ? isArabic
+                    ? "إيقاف مؤقت"
+                    : "Pause"
+                  : isArabic
+                    ? "ابدأ"
+                    : "Start"}
+              </button>
+
+              <button
+                onClick={finishSession}
+                className="rounded-xl bg-emerald-600 px-6 py-3 font-bold hover:bg-emerald-500"
+              >
+                {isArabic ? "إنهاء الجلسة" : "Finish session"}
+              </button>
+
+              <button
+                onClick={resetSession}
+                className="rounded-xl border border-white/10 px-6 py-3 font-bold hover:bg-white/5"
+              >
+                {isArabic ? "إعادة ضبط" : "Reset"}
+              </button>
+            </div>
+          </div>
+
+          {finishedXp !== null && (
+            <div className="mb-8 rounded-2xl border border-emerald-500/20 bg-emerald-500/10 p-5 text-center">
+              <div className="text-2xl font-black text-emerald-400">
+                +{finishedXp} XP
+              </div>
+
+              <p className="mt-2 text-slate-300">
+                {isArabic
+                  ? "أحسنت! خلصت جلسة المذاكرة."
+                  : "Great job! You finished your study session."}
+              </p>
+            </div>
+          )}
+
+          <div className="grid gap-4 md:grid-cols-3">
+            <div className="rounded-2xl border border-white/10 bg-white/5 p-5">
+              <div className="mb-2 text-2xl">📖</div>
+              <h2 className="font-bold">
+                {isArabic ? "اختر الدرس" : "Choose a lesson"}
+              </h2>
+              <p className="mt-2 text-sm text-slate-400">
+                {isArabic
+                  ? "حدد الدرس الذي تريد مذاكرته."
+                  : "Choose what you want to study."}
+              </p>
+            </div>
+
+            <div className="rounded-2xl border border-white/10 bg-white/5 p-5">
+              <div className="mb-2 text-2xl">🎯</div>
+              <h2 className="font-bold">
+                {isArabic ? "ذاكر بتركيز" : "Study with focus"}
+              </h2>
+              <p className="mt-2 text-sm text-slate-400">
+                {isArabic
+                  ? "ابدأ المؤقت وركز في مذاكرتك."
+                  : "Start the timer and stay focused."}
+              </p>
+            </div>
+
+            <div className="rounded-2xl border border-white/10 bg-white/5 p-5">
+              <div className="mb-2 text-2xl">🤖</div>
+              <h2 className="font-bold">
+                {isArabic ? "اسأل مِفتاح AI" : "Ask Miftah AI"}
+              </h2>
+              <p className="mt-2 text-sm text-slate-400">
+                {isArabic
+                  ? "استخدم الذكاء الاصطناعي للمساعدة."
+                  : "Use AI when you need help."}
+              </p>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+  );
+}

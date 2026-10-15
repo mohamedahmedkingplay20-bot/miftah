@@ -1,0 +1,118 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* =========================================================
+   MIFTAH THEME
+========================================================= */
+
+.miftah-theme-page {
+  min-height: 100vh;
+
+  --miftah-accent: #2563eb;
+  --miftah-second: #06b6d4;
+  --miftah-glow: rgba(37, 99, 235, 0.3);
+
+  transition:
+    color 0.7s ease,
+    background-color 0.7s ease,
+    border-color 0.7s ease,
+    box-shadow 0.7s ease;
+}
+
+/* الصفحة فقط تتحرك مع الثيم */
+
+.miftah-theme-page button,
+.miftah-theme-page a,
+.miftah-theme-page input,
+.miftah-theme-page textarea {
+  transition:
+    color 0.7s ease,
+    background-color 0.7s ease,
+    border-color 0.7s ease,
+    box-shadow 0.7s ease;
+}
+
+/* Glow */
+
+.miftah-theme-page::before {
+  content: "";
+  position: fixed;
+  inset: -20%;
+  pointer-events: none;
+  z-index: -1;
+
+  background:
+    radial-gradient(
+      circle at 15% 20%,
+      var(--miftah-glow),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 85% 80%,
+      color-mix(
+        in srgb,
+        var(--miftah-second) 15%,
+        transparent
+      ),
+      transparent 30%
+    );
+
+  opacity: 0.55;
+
+  transition:
+    background 1s ease,
+    opacity 1s ease;
+}
+
+/* Glow للأزرار */
+
+.miftah-theme-page .bg-blue-600,
+.miftah-theme-page .bg-blue-500 {
+  box-shadow:
+    0 0 30px var(--miftah-glow);
+}
+
+/* Rainbow */
+
+.miftah-theme-page[data-miftah-theme="rainbow"] {
+  animation:
+    miftahRainbowPulse 1.6s ease-in-out infinite;
+}
+
+@keyframes miftahRainbowPulse {
+  0% {
+    filter: saturate(1);
+  }
+
+  50% {
+    filter: saturate(1.12);
+  }
+
+  100% {
+    filter: saturate(1);
+  }
+}

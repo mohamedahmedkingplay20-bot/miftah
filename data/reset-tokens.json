@@ -1,0 +1,14 @@
+[
+  {
+    "token": "0e4098fa40fecbdf0a891aadc7deff45e2d46d710e14cacba6de7c580ee23831",
+    "userId": "ff9d17f1-040b-44c3-a1f8-cfb909c6a77b",
+    "expiresAt": 1791478784985,
+    "used": false
+  },
+  {
+    "token": "44f66a2454fdcadd89b265bc6b9625baaf44c42fd9d3e1dae715e25e8335604a",
+    "userId": "ff9d17f1-040b-44c3-a1f8-cfb909c6a77b",
+    "expiresAt": 1791479632547,
+    "used": true
+  }
+]

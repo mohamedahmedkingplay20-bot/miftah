@@ -1,0 +1,629 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useLanguage } from "@/components/LanguageProvider";
+
+const themeList = [
+  {
+    id: "blue",
+    name: "أزرق",
+    color: "#22d3ee",
+    premium: false,
+  },
+  {
+    id: "purple",
+    name: "بنفسجي",
+    color: "#c084fc",
+    premium: false,
+  },
+  {
+    id: "green",
+    name: "أخضر",
+    color: "#4ade80",
+    premium: false,
+  },
+  {
+    id: "red",
+    name: "أحمر",
+    color: "#fb7185",
+    premium: false,
+  },
+  {
+    id: "rainbow",
+    name: "Rainbow",
+    color: "#a855f7",
+    premium: false,
+  },
+  {
+    id: "mono",
+    name: "أبيض وأسود",
+    color: "#ffffff",
+    premium: false,
+  },
+  {
+    id: "gold",
+    name: "ذهبي",
+    color: "#facc15",
+    premium: true,
+  },
+  {
+    id: "pink",
+    name: "Neon Pink",
+    color: "#f472b6",
+    premium: true,
+  },
+];
+
+export default function SettingsPage() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  const { language, setLanguage, isArabic } = useLanguage();
+
+  const [tab, setTab] = useState("account");
+
+  const [name, setName] = useState("mohamed ahmed");
+  const [nickname, setNickname] = useState("المستكشف");
+
+  const [oldPassword, setOldPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+
+  const [notifications, setNotifications] = useState(true);
+
+  const [activeTheme, setActiveTheme] = useState("blue");
+
+  const [message, setMessage] = useState("");
+
+  useEffect(() => {
+    const requestedTab = searchParams.get("tab");
+
+    if (requestedTab) {
+      setTab(requestedTab);
+    }
+
+    const savedName = localStorage.getItem("miftah-name");
+    const savedNickname = localStorage.getItem("miftah-nickname");
+    const savedTheme = localStorage.getItem("miftah-theme");
+    const savedNotifications =
+      localStorage.getItem("miftah-notifications");
+
+    if (savedName) setName(savedName);
+    if (savedNickname) setNickname(savedNickname);
+    if (savedTheme) setActiveTheme(savedTheme);
+
+    if (savedNotifications !== null) {
+      setNotifications(savedNotifications === "true");
+    }
+  }, [searchParams]);
+
+  function toast(text: string) {
+    setMessage(text);
+
+    setTimeout(() => {
+      setMessage("");
+    }, 2500);
+  }
+
+  function saveAccount() {
+    localStorage.setItem("miftah-name", name);
+    localStorage.setItem("miftah-nickname", nickname);
+
+    window.dispatchEvent(new Event("miftah-profile-change"));
+
+    toast(isArabic ? "تم حفظ بيانات الحساب" : "Account saved");
+  }
+
+  function changePassword() {
+    if (!newPassword || newPassword.length < 6) {
+      toast(
+        isArabic
+          ? "كلمة المرور لازم تكون 6 أحرف على الأقل"
+          : "Password must be at least 6 characters"
+      );
+      return;
+    }
+
+    localStorage.setItem("miftah-password", newPassword);
+
+    setOldPassword("");
+    setNewPassword("");
+
+    toast(
+      isArabic
+        ? "تم تغيير كلمة المرور"
+        : "Password changed"
+    );
+  }
+
+  function selectTheme(theme: (typeof themeList)[number]) {
+    if (theme.premium) {
+      toast(
+        isArabic
+          ? "هذا الثيم Premium وسيتم فتحه بعد إطلاق النظام المدفوع"
+          : "This theme is Premium"
+      );
+      return;
+    }
+
+    localStorage.setItem("miftah-theme", theme.id);
+    setActiveTheme(theme.id);
+
+    window.dispatchEvent(new Event("miftah-theme-change"));
+
+    toast(
+      isArabic
+        ? `تم تطبيق ثيم ${theme.name}`
+        : `${theme.name} theme applied`
+    );
+  }
+
+  function toggleNotifications() {
+    const value = !notifications;
+
+    setNotifications(value);
+    localStorage.setItem(
+      "miftah-notifications",
+      String(value)
+    );
+
+    toast(
+      value
+        ? isArabic
+          ? "تم تشغيل الإشعارات"
+          : "Notifications enabled"
+        : isArabic
+        ? "تم إيقاف الإشعارات"
+        : "Notifications disabled"
+    );
+  }
+
+  return (
+    <main
+      dir={isArabic ? "rtl" : "ltr"}
+      className="min-h-screen bg-[#030712] px-5 py-10 text-white"
+    >
+      <div className="mx-auto max-w-6xl">
+        <div className="mb-10 flex items-center justify-between">
+          <button
+            onClick={() => router.push("/")}
+            className="rounded-2xl border border-white/10 bg-white/5 px-5 py-3 text-sm font-black transition hover:border-white/20 hover:bg-white/10"
+          >
+            ← {isArabic ? "الرئيسية" : "Home"}
+          </button>
+
+          <div className="text-right">
+            <div className="text-xs font-black tracking-[.3em] text-cyan-400">
+              MIFTAH
+            </div>
+
+            <h1 className="text-4xl font-black">
+              {isArabic ? "الإعدادات" : "Settings"}
+            </h1>
+          </div>
+        </div>
+
+        <div className="grid gap-6 lg:grid-cols-[240px_1fr]">
+          {/* SIDEBAR */}
+          <aside className="h-fit rounded-3xl border border-white/10 bg-[#091120] p-3">
+            {[
+              ["account", "👤", isArabic ? "الحساب" : "Account"],
+              ["themes", "🎨", "Themes"],
+              ["language", "🌐", isArabic ? "اللغة" : "Language"],
+              ["notifications", "🔔", isArabic ? "الإشعارات" : "Notifications"],
+              ["security", "🔐", isArabic ? "الأمان" : "Security"],
+            ].map(([id, icon, label]) => (
+              <button
+                key={id}
+                onClick={() => setTab(id)}
+                className={`mb-1 flex w-full items-center gap-3 rounded-2xl px-4 py-4 text-right text-sm font-bold transition ${
+                  tab === id
+                    ? "bg-white/10 text-white"
+                    : "text-slate-400 hover:bg-white/5 hover:text-white"
+                }`}
+              >
+                <span>{icon}</span>
+                <span>{label}</span>
+              </button>
+            ))}
+          </aside>
+
+          {/* CONTENT */}
+          <section className="space-y-6">
+            {tab === "account" && (
+              <div className="settings-card">
+                <div className="section-label">ACCOUNT</div>
+
+                <h2 className="settings-title">
+                  {isArabic ? "حسابك" : "Your account"}
+                </h2>
+
+                <p className="settings-description">
+                  {isArabic
+                    ? "غيّر بياناتك الأساسية."
+                    : "Change your public information."}
+                </p>
+
+                <label>Full name</label>
+
+                <input
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  className="settings-input"
+                />
+
+                <label>Nickname</label>
+
+                <input
+                  value={nickname}
+                  onChange={(e) => setNickname(e.target.value)}
+                  className="settings-input"
+                />
+
+                <button
+                  onClick={saveAccount}
+                  className="save-button"
+                >
+                  {isArabic ? "حفظ التغييرات" : "Save changes"}
+                </button>
+              </div>
+            )}
+
+            {tab === "security" && (
+              <div className="settings-card">
+                <div className="section-label purple">
+                  SECURITY
+                </div>
+
+                <h2 className="settings-title">
+                  {isArabic ? "الأمان" : "Password"}
+                </h2>
+
+                <p className="settings-description">
+                  {isArabic
+                    ? "غيّر كلمة مرور حسابك."
+                    : "Change your account password."}
+                </p>
+
+                <label>
+                  {isArabic
+                    ? "كلمة المرور الحالية"
+                    : "Current password"}
+                </label>
+
+                <input
+                  type="password"
+                  value={oldPassword}
+                  onChange={(e) =>
+                    setOldPassword(e.target.value)
+                  }
+                  className="settings-input"
+                  placeholder="••••••••"
+                />
+
+                <label>
+                  {isArabic
+                    ? "كلمة المرور الجديدة"
+                    : "New password"}
+                </label>
+
+                <input
+                  type="password"
+                  value={newPassword}
+                  onChange={(e) =>
+                    setNewPassword(e.target.value)
+                  }
+                  className="settings-input"
+                  placeholder="••••••••"
+                />
+
+                <button
+                  onClick={changePassword}
+                  className="save-button"
+                >
+                  {isArabic
+                    ? "تغيير كلمة المرور"
+                    : "Change password"}
+                </button>
+              </div>
+            )}
+
+            {tab === "themes" && (
+              <div className="settings-card">
+                <div className="section-label pink">
+                  THEMES
+                </div>
+
+                <h2 className="settings-title">
+                  {isArabic ? "الثيمات" : "Themes"}
+                </h2>
+
+                <p className="settings-description">
+                  {isArabic
+                    ? "غيّر شكل وألوان مفتاح بالكامل."
+                    : "Change the colors of Miftah."}
+                </p>
+
+                <div className="grid gap-4 sm:grid-cols-2">
+                  {themeList.map((theme) => (
+                    <button
+                      key={theme.id}
+                      onClick={() => selectTheme(theme)}
+                      className={`theme-card ${
+                        activeTheme === theme.id
+                          ? "theme-active"
+                          : ""
+                      }`}
+                    >
+                      <div
+                        className="theme-color"
+                        style={{
+                          background:
+                            theme.id === "rainbow"
+                              ? "linear-gradient(90deg,#22d3ee,#8b5cf6,#f472b6,#facc15)"
+                              : theme.color,
+                        }}
+                      />
+
+                      <div className="flex-1 text-right">
+                        <div className="font-black">
+                          {theme.name}
+                        </div>
+
+                        <div className="mt-1 text-xs text-slate-500">
+                          {theme.premium
+                            ? "PREMIUM"
+                            : isArabic
+                            ? "مجاني"
+                            : "FREE"}
+                        </div>
+                      </div>
+
+                      {theme.premium && (
+                        <span className="rounded-full bg-yellow-400/10 px-2 py-1 text-[9px] font-black text-yellow-300">
+                          PREMIUM
+                        </span>
+                      )}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {tab === "language" && (
+              <div className="settings-card">
+                <div className="section-label">
+                  LANGUAGE
+                </div>
+
+                <h2 className="settings-title">
+                  {isArabic ? "اللغة" : "Language"}
+                </h2>
+
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <button
+                    onClick={() => {
+                      setLanguage("ar");
+                      toast("تم تحويل الموقع للعربية");
+                    }}
+                    className={`language-card ${
+                      language === "ar"
+                        ? "language-active"
+                        : ""
+                    }`}
+                  >
+                    🇪🇬
+                    <span>العربية</span>
+                  </button>
+
+                  <button
+                    onClick={() => {
+                      setLanguage("en");
+                      toast("English enabled");
+                    }}
+                    className={`language-card ${
+                      language === "en"
+                        ? "language-active"
+                        : ""
+                    }`}
+                  >
+                    🇬🇧
+                    <span>English</span>
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {tab === "notifications" && (
+              <div className="settings-card">
+                <div className="section-label">
+                  NOTIFICATIONS
+                </div>
+
+                <h2 className="settings-title">
+                  {isArabic
+                    ? "الإشعارات"
+                    : "Notifications"}
+                </h2>
+
+                <button
+                  onClick={toggleNotifications}
+                  className="flex w-full items-center justify-between rounded-2xl border border-white/10 bg-white/[0.025] p-5 text-right transition hover:bg-white/5"
+                >
+                  <div>
+                    <div className="font-black">
+                      {isArabic
+                        ? "إشعارات مفتاح"
+                        : "Miftah notifications"}
+                    </div>
+
+                    <div className="mt-1 text-sm text-slate-500">
+                      {isArabic
+                        ? "تنبيهات الإنجازات والتحديثات."
+                        : "Updates and achievement alerts."}
+                    </div>
+                  </div>
+
+                  <div
+                    className={`h-7 w-12 rounded-full p-1 transition ${
+                      notifications
+                        ? "bg-cyan-400"
+                        : "bg-slate-700"
+                    }`}
+                  >
+                    <div
+                      className={`h-5 w-5 rounded-full bg-white transition ${
+                        notifications
+                          ? "translate-x-5"
+                          : ""
+                      }`}
+                    />
+                  </div>
+                </button>
+              </div>
+            )}
+          </section>
+        </div>
+      </div>
+
+      {message && (
+        <div className="fixed bottom-6 left-1/2 z-[200] -translate-x-1/2">
+          <div className="rounded-2xl border border-white/10 bg-[#0a1323] px-6 py-4 text-sm font-bold shadow-2xl">
+            {message}
+          </div>
+        </div>
+      )}
+
+      <style jsx global>{`
+        .settings-card {
+          border: 1px solid rgba(255,255,255,.08);
+          border-radius: 28px;
+          background: #091120;
+          padding: 28px;
+          box-shadow: 0 25px 70px rgba(0,0,0,.2);
+        }
+
+        .section-label {
+          color: #22d3ee;
+          font-size: 12px;
+          font-weight: 900;
+          letter-spacing: .2em;
+        }
+
+        .section-label.purple {
+          color: #c084fc;
+        }
+
+        .section-label.pink {
+          color: #f472b6;
+        }
+
+        .settings-title {
+          margin-top: 7px;
+          font-size: 30px;
+          font-weight: 900;
+        }
+
+        .settings-description {
+          margin-top: 7px;
+          margin-bottom: 25px;
+          color: #64748b;
+        }
+
+        .settings-card label {
+          display: block;
+          margin-top: 18px;
+          margin-bottom: 8px;
+          font-size: 13px;
+          font-weight: 800;
+        }
+
+        .settings-input {
+          width: 100%;
+          border: 1px solid rgba(255,255,255,.08);
+          border-radius: 16px;
+          background: #070e1b;
+          padding: 15px 17px;
+          color: white;
+          outline: none;
+          transition: .2s ease;
+        }
+
+        .settings-input:focus {
+          border-color: var(--miftah-accent);
+          box-shadow: 0 0 0 3px rgba(34,211,238,.08);
+        }
+
+        .save-button {
+          margin-top: 24px;
+          border-radius: 15px;
+          background: linear-gradient(
+            135deg,
+            var(--miftah-accent-2),
+            var(--miftah-accent)
+          );
+          padding: 14px 24px;
+          font-weight: 900;
+          transition: .2s ease;
+        }
+
+        .save-button:hover {
+          transform: translateY(-2px);
+        }
+
+        .theme-card {
+          display: flex;
+          align-items: center;
+          gap: 13px;
+          border: 1px solid rgba(255,255,255,.08);
+          border-radius: 20px;
+          padding: 16px;
+          background: rgba(255,255,255,.025);
+          text-align: right;
+          transition: .25s ease;
+        }
+
+        .theme-card:hover {
+          transform: translateY(-3px);
+          border-color: rgba(255,255,255,.2);
+        }
+
+        .theme-active {
+          border-color: var(--miftah-accent);
+          box-shadow: 0 0 30px rgba(34,211,238,.08);
+        }
+
+        .theme-color {
+          width: 38px;
+          height: 38px;
+          flex-shrink: 0;
+          border-radius: 12px;
+          box-shadow: 0 0 20px rgba(255,255,255,.08);
+        }
+
+        .language-card {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 12px;
+          border: 1px solid rgba(255,255,255,.08);
+          border-radius: 20px;
+          padding: 22px;
+          background: rgba(255,255,255,.025);
+          font-weight: 900;
+          transition: .25s ease;
+        }
+
+        .language-card:hover {
+          transform: translateY(-3px);
+          border-color: var(--miftah-accent);
+        }
+
+        .language-active {
+          border-color: var(--miftah-accent);
+          background: rgba(34,211,238,.06);
+        }
+      `}</style>
+    </main>
+  );
+}
