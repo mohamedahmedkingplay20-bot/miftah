@@ -1,10 +1,10 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useState, Suspense } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 
-export default function ResetPasswordPage() {
+function ResetPasswordForm() {
   const searchParams = useSearchParams();
 
   const token = useMemo(
@@ -84,91 +84,99 @@ export default function ResetPasswordPage() {
   }
 
   return (
+    <div className="w-full rounded-[35px] border border-white/10 bg-[#091221] p-8 shadow-2xl md:p-10">
+      <div className="text-center">
+        <div className="text-6xl">🔐</div>
+
+        <h1 className="mt-5 text-4xl font-black">
+          كلمة مرور جديدة
+        </h1>
+
+        <p className="mt-3 text-slate-500">
+          اختار كلمة مرور جديدة لحسابك.
+        </p>
+      </div>
+
+      {error && (
+        <div className="mt-7 rounded-2xl border border-red-500/20 bg-red-500/10 p-4 text-red-300">
+          {error}
+        </div>
+      )}
+
+      {success && (
+        <div className="mt-7 rounded-2xl border border-emerald-500/20 bg-emerald-500/10 p-4 text-emerald-300">
+          {success}
+        </div>
+      )}
+
+      <div className="mt-8 space-y-5">
+        <label className="block">
+          <span className="mb-2 block font-black">
+            كلمة المرور الجديدة
+          </span>
+
+          <input
+            type="password"
+            value={password}
+            onChange={(e) =>
+              setPassword(e.target.value)
+            }
+            className="w-full rounded-2xl border border-white/10 bg-black/20 px-5 py-4 outline-none focus:border-blue-500"
+          />
+        </label>
+
+        <label className="block">
+          <span className="mb-2 block font-black">
+            تأكيد كلمة المرور
+          </span>
+
+          <input
+            type="password"
+            value={confirm}
+            onChange={(e) =>
+              setConfirm(e.target.value)
+            }
+            className="w-full rounded-2xl border border-white/10 bg-black/20 px-5 py-4 outline-none focus:border-blue-500"
+          />
+        </label>
+
+        <button
+          onClick={resetPassword}
+          disabled={loading || !!success}
+          className="w-full rounded-2xl py-4 font-black disabled:opacity-50"
+          style={{
+            background:
+              "linear-gradient(135deg,#2563eb,#06b6d4)",
+          }}
+        >
+          {loading
+            ? "جاري الحفظ..."
+            : "تغيير كلمة المرور"}
+        </button>
+
+        {success && (
+          <Link
+            href="/login"
+            className="block rounded-2xl border border-white/10 bg-white/[0.04] p-4 text-center font-bold hover:bg-white/[0.08]"
+          >
+            تسجيل الدخول
+          </Link>
+        )}
+      </div>
+    </div>
+  );
+}
+
+export default function ResetPasswordPage() {
+  return (
     <main
       dir="rtl"
       className="min-h-screen bg-[#020617] px-5 py-10 text-white"
     >
       <div className="mx-auto flex min-h-[85vh] max-w-lg items-center">
-        <div className="w-full rounded-[35px] border border-white/10 bg-[#091221] p-8 shadow-2xl md:p-10">
-          <div className="text-center">
-            <div className="text-6xl">🔐</div>
-
-            <h1 className="mt-5 text-4xl font-black">
-              كلمة مرور جديدة
-            </h1>
-
-            <p className="mt-3 text-slate-500">
-              اختار كلمة مرور جديدة لحسابك.
-            </p>
-          </div>
-
-          {error && (
-            <div className="mt-7 rounded-2xl border border-red-500/20 bg-red-500/10 p-4 text-red-300">
-              {error}
-            </div>
-          )}
-
-          {success && (
-            <div className="mt-7 rounded-2xl border border-emerald-500/20 bg-emerald-500/10 p-4 text-emerald-300">
-              {success}
-            </div>
-          )}
-
-          <div className="mt-8 space-y-5">
-            <label className="block">
-              <span className="mb-2 block font-black">
-                كلمة المرور الجديدة
-              </span>
-
-              <input
-                type="password"
-                value={password}
-                onChange={(e) =>
-                  setPassword(e.target.value)
-                }
-                className="w-full rounded-2xl border border-white/10 bg-black/20 px-5 py-4 outline-none focus:border-blue-500"
-              />
-            </label>
-
-            <label className="block">
-              <span className="mb-2 block font-black">
-                تأكيد كلمة المرور
-              </span>
-
-              <input
-                type="password"
-                value={confirm}
-                onChange={(e) =>
-                  setConfirm(e.target.value)
-                }
-                className="w-full rounded-2xl border border-white/10 bg-black/20 px-5 py-4 outline-none focus:border-blue-500"
-              />
-            </label>
-
-            <button
-              onClick={resetPassword}
-              disabled={loading || !!success}
-              className="w-full rounded-2xl py-4 font-black disabled:opacity-50"
-              style={{
-                background:
-                  "linear-gradient(135deg,#2563eb,#06b6d4)",
-              }}
-            >
-              {loading
-                ? "جاري الحفظ..."
-                : "تغيير كلمة المرور"}
-            </button>
-
-            {success && (
-              <Link
-                href="/login"
-                className="block rounded-2xl border border-white/10 bg-white/[0.04] p-4 text-center font-bold hover:bg-white/[0.08]"
-              >
-                تسجيل الدخول
-              </Link>
-            )}
-          </div>
-        </div>
+        <Suspense fallback={<div className="w-full text-center text-slate-400">جاري التحميل...</div>}>
+          <ResetPasswordForm />
+        </Suspense>
       </div>
     </main>
   );
