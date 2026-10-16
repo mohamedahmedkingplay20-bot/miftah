@@ -7,6 +7,9 @@ import SiteShell from "@/components/SiteShell";
 export const metadata: Metadata = {
   title: "مِفتاح",
   description: "مفتاحك لعالم المعرفة والإبداع.",
+  verification: {
+    google: "Q0ffDGDHULmH3LGk6H_1QMXWYQDaCB-WUQOHRV0D_OM",
+  },
 };
 
 export default function RootLayout({
