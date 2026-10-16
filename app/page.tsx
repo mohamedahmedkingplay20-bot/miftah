@@ -354,11 +354,13 @@ export default function HomePage() {
             color: theme.accent,
           }}
         >
-          {icon.key} مِفتاح
-        </div>
-      </main>
-    );
-  }
+  <img
+  src="/miftah-logo.png"
+  alt="مِفتاح"
+  width={48}
+  height={48}
+  className="h-12 w-12 rounded-2xl object-cover"
+/>
 
   if (!user) {
     return (
